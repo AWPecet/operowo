@@ -6,4 +6,4 @@
 
 echo "Run composer:"
 cd $OPENSHIFT_REPO_DIR
-$OPENSHIFT_RUNTIME_DIR/bin/php composer.phar install
+$OPENSHIFT_RUNTIME_DIR/bin/php composer.phar install --prefer-source=git
