@@ -12,7 +12,7 @@
 # replace the $OPENSHIFT_INTERNAL_IP and $OPENSHIFT_INTERNAL_PORT before starting up the server
 
 echo "Try start php-cgi:"
-nohup php-cgi -b $OPENSHIFT_INTERNAL_IP:16123 2>&1 &
+nohup $OPENSHIFT_RUNTIME_DIR/bin/php-cgi -b $OPENSHIFT_INTERNAL_IP:16123 2>&1 &
 
 echo "Try change parameters in nginx conf template"
 sed -e "s/`echo '$OPENSHIFT_IP:$OPENSHIFT_PORT'`/`echo $OPENSHIFT_INTERNAL_IP:$OPENSHIFT_INTERNAL_PORT`/" $OPENSHIFT_RUNTIME_DIR/conf/nginx.conf.template > $OPENSHIFT_RUNTIME_DIR/conf/nginx.conf
