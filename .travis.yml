@@ -5,10 +5,7 @@ php:
     - 5.4
 
 before_script:
-    - mv app/config/parameters.yml.env_template app/config/parameters.yml
+    - mv app/config/parameters.yml.travis app/config/parameters.yml
     - php composer.phar install
 
 script: phpunit -c app
-
-env:
-    - SYMFONY__OPEROWO__TEST__DATABASE__NAME=myapp_test SYMFONY__OPEROWO__TEST__DATABASE__USER=postgres SYMFONY__OPEROWO__TEST__DATABASE__PASSWORD="" SYMFONY__OPEROWO__TEST__DATABASE__HOST="" SYMFONY__OPEROWO__TEST__DATABASE__PORT="" SYMFONY__OPEROWO__DATABASE__NAME="" SYMFONY__OPEROWO__DATABASE__USER="" SYMFONY__OPEROWO__DATABASE__PASSWORD="" SYMFONY__OPEROWO__DATABASE__HOST="" SYMFONY__OPEROWO__DATABASE__PORT=""
