@@ -4,7 +4,7 @@ parameters:
     database_port:     ~
     database_name:     ~
     database_user:     ~
-    database_user:     ~
+    database_password: ~
 
     database_test_driver:   pdo_pgsql
     database_test_host:     ~
