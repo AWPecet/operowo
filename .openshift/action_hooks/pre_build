@@ -4,6 +4,9 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
+echo "Move config templates"
+cp $OPENSHIFT_REPO_DIR/app/parameters.yml.env_template $OPENSHIFT_REPO_DIR/app/parameters.yml
+
 echo "Run composer:"
 cd $OPENSHIFT_REPO_DIR
 $OPENSHIFT_RUNTIME_DIR/bin/php composer.phar install --prefer-source=git
