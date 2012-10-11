@@ -8,3 +8,8 @@ before_script:
     - php composer.phar install
 
 script: phpunit -c app
+
+env:
+	- SYMFONY__OPEROWO__TEST__DATABASE__NAME=myapp_test
+	- SYMFONY__OPEROWO__TEST__DATABASE__USER=postgres
+	- SYMFONY__OPEROWO__TEST__DATABASE__PASSWORD=
