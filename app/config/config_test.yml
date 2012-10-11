@@ -18,9 +18,12 @@ swiftmailer:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_pgsql
-        host:     localhost
-        dbname:   operowo_test
-        user:     postgres
-        password: postgres
-        charset:  UTF8
+        connections:
+            default:
+                driver:   pdo_pgsql
+                host:     %database_test_host%
+                port:     %database_test_port%
+                dbname:   %database_test_name%
+                user:     %database_test_user%
+                password: %database_test_password%
+                charset:  UTF8
