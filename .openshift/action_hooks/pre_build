@@ -8,5 +8,6 @@ echo "Move config templates"
 cp $OPENSHIFT_REPO_DIR/app/config/parameters.yml.env_template $OPENSHIFT_REPO_DIR/app/config/parameters.yml
 
 echo "Run composer:"
+unset GIT_DIR
 cd $OPENSHIFT_REPO_DIR
 $OPENSHIFT_RUNTIME_DIR/bin/php composer.phar install --prefer-source=git
