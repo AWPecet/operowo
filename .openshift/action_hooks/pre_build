@@ -5,7 +5,7 @@
 # could be python, php, ruby, etc.
 
 echo "Move config templates"
-cp $OPENSHIFT_REPO_DIR/app/parameters.yml.env_template $OPENSHIFT_REPO_DIR/app/parameters.yml
+cp $OPENSHIFT_REPO_DIR/app/config/parameters.yml.env_template $OPENSHIFT_REPO_DIR/config/app/parameters.yml
 
 echo "Run composer:"
 cd $OPENSHIFT_REPO_DIR
