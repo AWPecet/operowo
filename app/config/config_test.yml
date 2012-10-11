@@ -6,7 +6,7 @@ framework:
     session:
         storage_id: session.storage.mock_file
     profiler:
-        enable: false
+        #enable: false
 
 web_profiler:
     toolbar: false
@@ -14,3 +14,13 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_pgsql
+        host:     localhost
+        dbname:   operowo_test
+        user:     postgres
+        password: postgres
+        charset:  UTF8
