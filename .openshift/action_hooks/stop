@@ -6,4 +6,6 @@ echo "Try kill php-cgi"
 kill `ps -ef | grep php-cgi | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
 echo "Try stop nginx"
 nohup $OPENSHIFT_RUNTIME_DIR/sbin/nginx -s stop > $OPENSHIFT_LOG_DIR/server.log 2>&1 &
+echo "Try stop postgresql"
+$OPENSHIFT_RUNTIME_DIR/bin/pg_ctl -D $OPENSHIFT_RUNTIME_DIR/data/pgsql > $OPENSHIFT_LOG_DIR/postgres.log 2>&1 &
 exit 0
