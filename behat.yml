@@ -1,0 +1,5 @@
+default:
+    extensions:
+        Behat\Symfony2Extension\Extension: ~
+    context:
+        class: Behat\MinkExtension\Context\MinkContext
