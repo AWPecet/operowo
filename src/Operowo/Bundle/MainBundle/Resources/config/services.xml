@@ -4,17 +4,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="operowo_main.example.class">Operowo\Bundle\MainBundle\Example</parameter>
+        <parameter key="operowo.navbar_menu_builder.class">Operowo\Bundle\MainBundle\Menu\NavbarMenuBuilder</parameter>
+        <parameter key="operowo.navbar_main_menu.class">Knp\Menu\MenuItem</parameter>
     </parameters>
 
     <services>
-        <service id="operowo_main.example" class="%operowo_main.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="operowo.navbar" class="%mopa_bootstrap.navbar.generic%" scope="request">
+            <argument type="collection">
+                <argument type="service" key="leftmenu" id="operowo.navbar_main_menu" strict="false" />
+            </argument>
+            <argument type="collection" />
+            <argument type="collection">
+                <argument key="title">Operowo</argument>
+                <argument key="titleRoute">homepage</argument>
+            </argument>
+
+            <tag name="mopa_bootstrap.navbar" alias="frontendNavbar" />
+        </service>
+
+        <service id="operowo.navbar_menu_builder" class="%operowo.navbar_menu_builder.class%" scope="request">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="operowo.navbar_main_menu" class="%operowo.navbar_main_menu.class%" scope="request" factory-service="operowo.navbar_menu_builder" factory-method="createMainMenu">
+            <argument type="service" id="request" />
+
+            <tag name="knp_menu.menu" alias="main" />
         </service>
     </services>
-    -->
+
 </container>
