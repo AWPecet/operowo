@@ -1,5 +1,5 @@
 {
-    "hash": "82ab33569eb0c0d7aa40c4be31f3604c",
+    "hash": "2296c8eed2174a39872c85c7b9f69f44",
     "packages": [
         {
             "name": "behat/behat",
@@ -592,6 +592,46 @@
             "keywords": [
                 "database",
                 "orm"
+            ]
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker",
+                "reference": "cc2a254a5c49cb9c91ce41c5e195040809077765"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/fzaninotto/Faker/zipball/cc2a254a5c49cb9c91ce41c5e195040809077765",
+                "reference": "cc2a254a5c49cb9c91ce41c5e195040809077765",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "time": "1349588897",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "faker",
+                "fixtures",
+                "data"
             ]
         },
         {
@@ -1878,6 +1918,50 @@
             "type": "library",
             "installation-source": "source",
             "time": "1346816651"
+        },
+        {
+            "name": "willdurand/faker-bundle",
+            "version": "dev-master",
+            "target-dir": "Bazinga/Bundle/FakerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/BazingaFakerBundle",
+                "reference": "19624486caf20ea978e8b4aa47b215af88b763be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/willdurand/BazingaFakerBundle/zipball/19624486caf20ea978e8b4aa47b215af88b763be",
+                "reference": "19624486caf20ea978e8b4aa47b215af88b763be",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "2.*",
+                "fzaninotto/faker": "*"
+            },
+            "time": "1327612591",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Bazinga\\Bundle\\FakerBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
+                }
+            ],
+            "description": "Put the awesome Faker lib into the DIC and populate your database with fake data.",
+            "keywords": [
+                "faker",
+                "fixtures",
+                "data"
+            ]
         }
     ],
     "packages-dev": null,
@@ -1888,6 +1972,7 @@
     "stability-flags": {
         "mopa/bootstrap-bundle": 20,
         "knplabs/knp-paginator-bundle": 20,
-        "knplabs/knp-menu-bundle": 20
+        "knplabs/knp-menu-bundle": 20,
+        "willdurand/faker-bundle": 20
     }
 }
