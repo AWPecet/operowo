@@ -11,9 +11,15 @@
 # nohup $OPENSHIFT_REPO_DIR/diy/testrubyserver.rb $OPENSHIFT_INTERNAL_IP $OPENSHIFT_REPO_DIR/diy > $OPENSHIFT_LOG_DIR/server.log 2>&1 &
 # replace the $OPENSHIFT_INTERNAL_IP and $OPENSHIFT_INTERNAL_PORT before starting up the server
 
+echo "======================================================"
+echo "                         PHP                          "
+echo "======================================================"
 echo "Try start php-cgi:"
 nohup $OPENSHIFT_RUNTIME_DIR/bin/php-cgi -b $OPENSHIFT_INTERNAL_IP:16123 -d date.timezone="Europe/Warsaw" > $OPENSHIFT_LOG_DIR/server.log 2>&1 &
 
+echo "======================================================"
+echo "                        nginx                         "
+echo "======================================================"
 echo "Try change ip and port parameter in nginx conf template:"
 sed -e "s/`echo '$OPENSHIFT_IP:$OPENSHIFT_PORT'`/`echo $OPENSHIFT_INTERNAL_IP:$OPENSHIFT_INTERNAL_PORT`/" $OPENSHIFT_RUNTIME_DIR/conf/nginx.conf.template > $OPENSHIFT_RUNTIME_DIR/conf/nginx.conf.tmp1
 echo "Try change ip (for php-cgi) parameter in nginx conf template:"
@@ -25,3 +31,14 @@ sed -e "s,`echo '$OPENSHIFT_REPO_DIR'`,`echo $OPENSHIFT_REPO_DIR`," $OPENSHIFT_R
 rm $OPENSHIFT_RUNTIME_DIR/conf/nginx.conf.tmp1
 echo "Try run ngnix server"
 nohup $OPENSHIFT_RUNTIME_DIR/sbin/nginx > $OPENSHIFT_LOG_DIR/server.log 2>&1 &
+
+echo "======================================================"
+echo "                      PostgreSQL                      "
+echo "======================================================"
+echo "Try change IP parameter in postgres conf template:"
+sed -e "s/`echo '$OPENSHIFT_IP:'`/`echo $OPENSHIFT_INTERNAL_IP:`/" $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.template > $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1
+echo "Try change Port parameter in postgres conf template:"
+sed -e "s/`echo '$OPENSHIFT_PORT:'`/`echo $OPENSHIFT_INTERNAL_PORT:`/" $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1 > $OPENSHIFT_DATA_DIR/pgsql/postgres.conf
+rm $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1
+echo "Try run postgresql server"
+nohup $OPENSHIFT_RUNTIME_DIR/bin/postgres -D $OPENSHIFT_RUNTIME_DIR/data/pgsql > $OPENSHIFT_LOG_DIR/postgres.log 2>&1 &

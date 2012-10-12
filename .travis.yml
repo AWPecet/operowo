@@ -5,6 +5,7 @@ php:
     - 5.4
 
 before_script:
+    - mv app/config/parameters.yml.travis app/config/parameters.yml
     - php composer.phar install
 
 script: phpunit -c app
