@@ -1,5 +1,5 @@
 {
-    "hash": "bc897de834bc2e3792c388eaaa3f4f9f",
+    "hash": "2cee6e0c0e9bf19ce157d211132b2c39",
     "packages": [
         {
             "name": "behat/behat",
@@ -178,6 +178,51 @@
                 "testing",
                 "browser",
                 "web"
+            ]
+        },
+        {
+            "name": "behat/mink-browserkit-driver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Behat/MinkBrowserKitDriver.git",
+                "reference": "e262d9cf47361eddb4c7ee18f5c6cb5fdd686b51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Behat/MinkBrowserKitDriver/zipball/e262d9cf47361eddb4c7ee18f5c6cb5fdd686b51",
+                "reference": "e262d9cf47361eddb4c7ee18f5c6cb5fdd686b51",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1",
+                "symfony/browser-kit": ">=2.0.0,<2.2.0",
+                "symfony/dom-crawler": ">=2.0.0,<2.2.0"
+            },
+            "time": "1349820063",
+            "type": "mink-driver",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\Mink\\Driver": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Symfony2 BrowserKit driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "Symfony2",
+                "testing",
+                "browser"
             ]
         },
         {
