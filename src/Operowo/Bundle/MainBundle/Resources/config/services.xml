@@ -7,9 +7,20 @@
     <parameters>
         <parameter key="operowo.navbar_menu_builder.class">Operowo\Bundle\MainBundle\Menu\NavbarMenuBuilder</parameter>
         <parameter key="operowo.navbar_main_menu.class">Knp\Menu\MenuItem</parameter>
+        <parameter key="operowo.institutions_repository.class">Operowo\Bundle\MainBundle\Entity\InstitutionsRepository</parameter>
+        <parameter key="operowo.institution.class">Operowo\Bundle\MainBundle\Entity\Institution</parameter>
     </parameters>
 
     <services>
+
+        <!-- Repositories -->
+        <service id="operowo.institutions_repository" class="%operowo.institutions_repository.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>%operowo.institution.class%</argument>
+        </service>
+        <!-- End Repositories -->
+
         <service id="operowo.navbar" class="%mopa_bootstrap.navbar.generic%" scope="request">
             <argument type="collection">
                 <argument type="service" key="leftmenu" id="operowo.navbar_main_menu" strict="false" />
