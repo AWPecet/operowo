@@ -29,4 +29,4 @@ doctrine:
                 charset:  UTF8
 
 bazinga_faker:
-    orm: doctrine                
+    orm: doctrine
