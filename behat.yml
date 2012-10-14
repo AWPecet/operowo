@@ -6,3 +6,19 @@ default:
     context:
         #class: Behat\MinkExtension\Context\MinkContext
         class: Operowo\Behat\OperowoExtension\Context\FeatureContext
+        parameters:
+          Phabric:
+            db_parameters_file: app/config/parameters.yml
+            entities:
+              Institution:
+                tableName: 'institutions'
+                entityName: 'Institution'
+                primaryKey: 'id'
+                nameCol: 'name'
+                #sequenceName: 'institutions_id_seq'
+              Province:
+                tableName: 'provinces'
+                entityName: 'Province'
+                primaryKey: 'id'
+                nameCol: 'name'
+                sequenceName: 'provinces_id_seq'

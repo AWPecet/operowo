@@ -12,19 +12,20 @@ class FakerContext extends BehatContext implements KernelAwareInterface
     private $kernel;
 
     /**
-     * @Given /^Faker prepare "([^"]*)" fake "([^"]*)"$/
+     * @Given /^Faker prepare "([^"]*)" fake of institution$/
      */
-    public function fakerPrepareFake($number, $entity)
+    public function fakerPrepareFake($number)
     {
-        switch($entity)
-        {
-            case 'institution':
-                $entity = 'Operowo\Bundle\MainBundle\Entity\Institution';
-                break;
-        }
+        $institutionEntity = 'Operowo\Bundle\MainBundle\Entity\Institution';
+        $provinceEntity = 'Operowo\Bundle\MainBundle\Entity\Province';
+        $entityManager =  $this->kernel->getContainer()->get('doctrine.orm.default_entity_manager');
+
         $generator = \Faker\Factory::create('pl_PL');
-        $populator = new \Faker\ORM\Doctrine\Populator($generator, $this->kernel->getContainer()->get('doctrine.orm.default_entity_manager'));
-        $populator->addEntity($entity, $number);
+        $populator = new \Faker\ORM\Doctrine\Populator($generator, $entityManager);
+        $populator->addEntity($provinceEntity, 1);
+        $populator->addEntity($institutionEntity, $number, array(
+            'province' => function($insertedEntities) use($entityManager, $provinceEntity) { return $insertedEntities[$provinceEntity][0]; }
+        ));
         $populator->execute();
     }
 

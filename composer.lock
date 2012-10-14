@@ -1,5 +1,5 @@
 {
-    "hash": "a39ea50c4fdb8aebbd87e4ef084ca7fc",
+    "hash": "84db3c64b8f38a15b505041f0854c34c",
     "packages": [
         {
             "name": "behat/behat",
@@ -323,6 +323,54 @@
                 "framework",
                 "symfony",
                 "BDD"
+            ]
+        },
+        {
+            "name": "benwaine/phabric",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/benwaine/Phabric.git",
+                "reference": "f6cadc10fc24bfe535d976698741f65516fd9784"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/benwaine/Phabric/zipball/f6cadc10fc24bfe535d976698741f65516fd9784",
+                "reference": "f6cadc10fc24bfe535d976698741f65516fd9784",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "doctrine/dbal": ">=2.0@stable",
+                "behat/gherkin": ">=2@stable"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.7@stable"
+            },
+            "time": "1339069386",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Phabric\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Waine",
+                    "homepage": "http://ben-waine.co.uk"
+                }
+            ],
+            "description": "A DB mockup / fixture creation library for Behat",
+            "homepage": "https://github.com/benwaine/Phabric",
+            "keywords": [
+                "fixtures",
+                "Behat",
+                "doctrine",
+                "mockups"
             ]
         },
         {
@@ -2068,6 +2116,7 @@
         "knplabs/knp-paginator-bundle": 20,
         "knplabs/knp-menu-bundle": 20,
         "willdurand/faker-bundle": 20,
-        "doctrine/doctrine-fixtures-bundle": 20
+        "doctrine/doctrine-fixtures-bundle": 20,
+        "benwaine/phabric": 20
     }
 }

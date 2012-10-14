@@ -28,7 +28,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "knplabs/knp-menu-bundle": "dev-master",
         "willdurand/faker-bundle": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "benwaine/phabric": "dev-develop"
     },
     "scripts": {
         "post-install-cmd": [
