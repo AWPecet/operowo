@@ -5,10 +5,10 @@ namespace Operowo\Bundle\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Operowo\Bundle\MainBundle\Entity\InstitutionsRepository")
- * @ORM\Table(name="institutions")
+ * @ORM\Entity
+ * @ORM\Table(name="provinces")
  */
-class Institution
+class Province
 {
 	/**
 	 * @ORM\Id
@@ -21,12 +21,6 @@ class Institution
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
-
-	/**
-	 * @ORM\ManyToOne(targetEntity="Operowo\Bundle\MainBundle\Entity\Province", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-	 */
-	private $province;
 
 	public function getId()
 	{
@@ -43,13 +37,8 @@ class Institution
 		return $this->name;
 	}
 
-	public function setProvince(Province $province)
+	public function __toString()
 	{
-		$this->province = $province;
-	}
-
-	public function getProvince()
-	{
-		return $this->province;
+		return $this->getName();
 	}
 }

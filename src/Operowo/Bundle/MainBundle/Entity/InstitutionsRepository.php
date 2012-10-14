@@ -9,7 +9,6 @@ use JMS\DiExtraBundle\Annotation as DI;
 
 class InstitutionsRepository extends EntityRepository
 {
-
 	public function getQuery()
 	{
 		return $this->createQueryBuilder('i')->getQuery();
