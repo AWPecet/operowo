@@ -1,6 +1,44 @@
 {
-    "hash": "84db3c64b8f38a15b505041f0854c34c",
+    "hash": "f32a2b9acad17ecc6d3f6e384b90c48f",
     "packages": [
+        {
+            "name": "beberlei/assert",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/assert.git",
+                "reference": "44d2f6001fb548afd1a369bd46c10b12e7d7e475"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/beberlei/assert/zipball/44d2f6001fb548afd1a369bd46c10b12e7d7e475",
+                "reference": "44d2f6001fb548afd1a369bd46c10b12e7d7e475",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "time": "1346935394",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Assert": "lib/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                }
+            ],
+            "description": "Thin assertion library for input validation in business models.",
+            "keywords": [
+                "validation",
+                "assert",
+                "assertion"
+            ]
+        },
         {
             "name": "behat/behat",
             "version": "v2.4.4",
@@ -2117,6 +2155,7 @@
         "knplabs/knp-menu-bundle": 20,
         "willdurand/faker-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "benwaine/phabric": 20
+        "benwaine/phabric": 20,
+        "beberlei/assert": 20
     }
 }
