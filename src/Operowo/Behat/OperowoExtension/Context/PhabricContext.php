@@ -65,10 +65,15 @@ class PhabricContext extends BehatContext
             $property->setAccessible(true);
             $ds = $property->getValue($ent);
             $ro = new \ReflectionObject($ds);
+
             $property = $ro->getProperty('nameIdMap');
             $property->setAccessible(true);
             $map = $property->getValue($ds);
-            var_dump(($map));
+
+            $property = $ro->getProperty('tableMappings');
+            $property->setAccessible(true);
+            $tableMappings = $property->getValue($ds);
+            var_dump($map, $ent->getName(), $tableMappings);
 
             $id = $ent->getNamedItemId($provinceName);
 
