@@ -1,6 +1,6 @@
 <?php
 
-namespace Phabric\Datasource;
+namespace Operowo\Phabric\Datasource;
 
 use \Phabric\Datasource\IDatasource;
 use \Phabric\Entity;

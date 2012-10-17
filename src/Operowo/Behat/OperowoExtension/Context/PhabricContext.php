@@ -5,7 +5,7 @@ namespace Operowo\Behat\OperowoExtension\Context;
 use Behat\Behat\Context\BehatContext;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
-use Phabric\Datasource\Doctrine;
+use Operowo\Phabric\Datasource;
 use Phabric\Phabric;
 use Symfony\Component\Yaml\Yaml;
 use Behat\Gherkin\Node\TableNode;
