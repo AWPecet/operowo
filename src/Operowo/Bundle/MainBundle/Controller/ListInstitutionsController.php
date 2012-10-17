@@ -6,33 +6,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\DiExtraBundle\Annotation as DI;
+use Operowo\Bundle\MainBundle\Entity\InstitutionsCriteria;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ListInstitutionsController extends Controller
 {
-	/** @DI\Inject("operowo.institutions_repository") */
+    /**
+     * @DI\Inject("operowo.institutions_repository")
+     * @var \Operowo\Bundle\MainBundle\Entity\InstitutionsRepository
+     */
     private $institutionsRepository;
 
-	/** @DI\Inject("knp_paginator") */
-    private $paginator;
+    /**
+     * @DI\Inject("operowo.view.institutions_list")
+     * @var Operowo\Bundle\MainBundle\View\InstitutionsListView
+     */
+    private $view;
 
     /**
-     * @Route("/instytucje", name="operowo_institutions_list")
+     * @Route("/instytucje/{page}", name="operowo_institutions_list", requirements={"page" = "\d+"}, defaults={"page" = "1"})
      * @Route("/", name="homepage")
      * @Template("OperowoMainBundle:Institutions/List:list.html.twig")
+     * @ParamConverter("criteria", class="Operowo\Bundle\MainBundle\Entity\InstitutionsCriteria")
      */
-    public function getAction()
+    public function getAction(InstitutionsCriteria $criteria)
     {
-    	$query = $this->institutionsRepository->getQuery();
-    	$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate(
-		    $query,
-		    $this->get('request')->query->get('page', 1)/*page number*/,
-		    10/*limit per page*/
-		);
+        $institutionsCount = 0;
+    	$institutions = $this->institutionsRepository->findByCriteria($criteria, $institutionsCount);
+        $distribution = $this->institutionsRepository->getDistributionInProvinces();
 
-        return array(
-        	'institutions' => $pagination->getItems(),
-        	'pagination' => $pagination
-        );
+        $this->view
+            ->setInstitutions($institutions)
+            ->setInstitutionsCount($institutionsCount)
+            ->setCriteria($criteria)
+            ->setDistribution($distribution)
+        ;
+
+        return $this->view->toResponse();
     }
 }

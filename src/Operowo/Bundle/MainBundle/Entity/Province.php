@@ -22,6 +22,11 @@ class Province
 	 */
 	private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Operowo\Bundle\MainBundle\Entity\Institution", mappedBy="province")
+     */
+    private $institutions;
+
 	public function getId()
 	{
 		return $this->id;

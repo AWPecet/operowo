@@ -23,7 +23,7 @@ class Institution
 	private $name;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Operowo\Bundle\MainBundle\Entity\Province", fetch="EAGER")
+	 * @ORM\ManyToOne(targetEntity="Operowo\Bundle\MainBundle\Entity\Province", inversedBy="institutions", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
 	 */
 	private $province;

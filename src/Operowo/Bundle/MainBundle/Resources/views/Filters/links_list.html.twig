@@ -1,0 +1,41 @@
+<div class="well">
+    <ul class="nav nav-list provinces_filter">
+        <li class="nav-header">{{ label | trans }}</li>
+            {% for choice in choices %}
+            {% set class = "" %}
+            {% if choice['selected'] %}
+                {% set class="active" %}
+            {% endif %}
+
+            <li class="{{ class }}">
+                <a id="filter_{{ loop.index }}" href="{{ path(choice['route'], choice['query_parameters']) }}">
+                    {{ choice['subject'] }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{#
+<div class="well">
+    <ul class="nav nav-list provinces_filter">
+        <li class="nav-header">{% trans %}provinces{% endtrans %}</li>
+        {% for provinceWithDistribution in provinces_distribution %}
+
+        {% set class = "" %}
+        {% if provinceWithDistribution.selected == true %}
+        {% set class = "active" %}
+        {% set provincesIds = selected_provinces %}
+        {% else %}
+        {% set provincesIds = selected_provinces | merge([ provinceWithDistribution.province.id ]) %}
+        {% endif %}
+        <li class="{{ class }}">
+            <a id="filter_province_{{ provinceWithDistribution.province.id }}" href="{{ path('operowo_institutions_list', { provinces: provincesIds }) }}">
+                {{ provinceWithDistribution.province.name }}
+                ({{ provinceWithDistribution.distribution }})
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+        #}

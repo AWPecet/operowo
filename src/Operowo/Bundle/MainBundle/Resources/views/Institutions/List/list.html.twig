@@ -13,7 +13,7 @@
 				<h2>{{ institution.name }}</h2>
 
                 <div class="span4">
-                    <img src="http://placehold.it/150x150" />
+                    <img src="http://placehold.it/150x150" class="img-polaroid" />
                 </div>
 
                 <div class="span7">
@@ -27,6 +27,9 @@
             <hr/>
 		{% endfor %}
 
-		{{ pagination.render() | raw}}
-	</div>
+		{{ pagination_view.toString() | raw }}
+    </div>
+    <div class="span4 sidebar">
+        {{ filters_view.toString() | raw }}
+    </div>
 {% endblock %}

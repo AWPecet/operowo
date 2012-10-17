@@ -14,6 +14,10 @@
                 <source>province</source>
                 <target>Województwo</target>
             </trans-unit>
+            <trans-unit id="4">
+                <source>provinces</source>
+                <target>Województwa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
