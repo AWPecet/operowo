@@ -60,22 +60,9 @@ class PhabricContext extends BehatContext
             'PROVINCELOOKUP', function($provinceName, $bus) {
             $ent = $bus->getEntity('province');
 
-            $ro = new \ReflectionObject($ent);
-            $property = $ro->getProperty('ds');
-            $property->setAccessible(true);
-            $ds = $property->getValue($ent);
-            $ro = new \ReflectionObject($ds);
-
-            $property = $ro->getProperty('nameIdMap');
-            $property->setAccessible(true);
-            $map = $property->getValue($ds);
-
-            $property = $ro->getProperty('tableMappings');
-            $property->setAccessible(true);
-            $tableMappings = $property->getValue($ds);
-            var_dump($map, $ent->getName(), $tableMappings);
-
             $id = $ent->getNamedItemId($provinceName);
+
+            var_dump($provinceName, $id);
 
             return $id;
         });
