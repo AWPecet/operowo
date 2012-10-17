@@ -62,6 +62,8 @@ class PhabricContext extends BehatContext
 
             $id = $ent->getNamedItemId($provinceName);
 
+            var_dump($provinceName, $id);
+
             return $id;
         });
 
