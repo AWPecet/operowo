@@ -36,9 +36,9 @@ echo "======================================================"
 echo "                      PostgreSQL                      "
 echo "======================================================"
 echo "Try change IP parameter in postgres conf template:"
-sed -e "s/`echo '$OPENSHIFT_IP:'`/`echo $OPENSHIFT_INTERNAL_IP:`/" $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.template > $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1
+sed -e "s/`echo '$OPENSHIFT_IP'`/`echo $OPENSHIFT_INTERNAL_IP`/" $OPENSHIFT_DATA_DIR/pgsql/postgresql.conf.template > $OPENSHIFT_DATA_DIR/pgsql/postgresql.conf.tmp1
 echo "Try change Port parameter in postgres conf template:"
-sed -e "s/`echo '$OPENSHIFT_PORT:'`/`echo $OPENSHIFT_INTERNAL_PORT:`/" $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1 > $OPENSHIFT_DATA_DIR/pgsql/postgres.conf
-rm $OPENSHIFT_DATA_DIR/pgsql/postgres.conf.tmp1
+sed -e "s/`echo '$OPENSHIFT_PORT'`/`echo 16123`/" $OPENSHIFT_DATA_DIR/pgsql/postgresql.conf.tmp1 > $OPENSHIFT_DATA_DIR/pgsql/postgresql.conf
+rm $OPENSHIFT_DATA_DIR/pgsql/postgresql.conf.tmp1
 echo "Try run postgresql server"
 nohup $OPENSHIFT_RUNTIME_DIR/bin/postgres -D $OPENSHIFT_RUNTIME_DIR/data/pgsql > $OPENSHIFT_LOG_DIR/postgres.log 2>&1 &
