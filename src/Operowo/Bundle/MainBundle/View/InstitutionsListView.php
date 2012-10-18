@@ -75,12 +75,12 @@ class InstitutionsListView extends BaseTemplateView
             ->setSelectedChoicesId($this->getCriteria()->getFilterOnProvinceId())
         ;
 
-        $this->paginationView
-            ->setCriteria($this->getCriteria())
-            ->setTarget($institutions)
-            ->setTotalCount($this->getInstitutionsCount())
-            ->setRoute('operowo_institutions_list')
-        ;
+        $this->paginationView->bind(array(
+            'criteria' => $this->getCriteria()/*$this->getOption('criteria')*/,
+            'target' => $institutions,
+            'total_count' => $this->getInstitutionsCount(),
+            'route' => 'operowo_institutions_list'
+        ));
 
         $variables['institutions'] = $institutions;
         $variables['pagination_view'] = $this->paginationView;

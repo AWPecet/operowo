@@ -22,10 +22,6 @@ class PaginationView extends BaseView
      */
     private $criteria;
 
-    private $target;
-    private $totalCount;
-    private $route;
-
     /**
      * @DI\InjectParams({
      *      "paginator" = @DI\Inject("knp_paginator"),
@@ -40,62 +36,35 @@ class PaginationView extends BaseView
 
     public function toString()
     {
-        Assertion::notNull($this->getTarget(), 'Target is not set');
-        Assertion::notNull($this->getCriteria(), 'Criteria is not set');
-        Assertion::notNull($this->getTotalCount(), 'Total count is not set');
+        $this->assureIsBound(__METHOD__);
 
-        $criteria = $this->getCriteria();
+        $criteria = $this->getOption('criteria');
         /** @var $pagination SlidingPagination */
-        $pagination = $this->paginator->paginate($this->getTarget(), $criteria->getCurrentPage(), $criteria->getMaxPerPage());
-        $pagination->setTotalItemCount($this->getTotalCount());
-        if ($this->getRoute()) {
-            $pagination->setUsedRoute($this->getRoute());
-        }
+        $pagination = $this->paginator->paginate($this->getOption('target'), $criteria->getCurrentPage(), $criteria->getMaxPerPage());
+        $pagination->setTotalItemCount($this->getOption('total_count'));
+        $pagination->setUsedRoute($this->getOption('route'));
 
         return $pagination->render();
     }
 
-    public function setCriteria($criteria)
+    protected function buildOptionsResolver()
     {
-        $this->criteria = $criteria;
-        return $this;
-    }
+        $resolver = parent::buildOptionsResolver();
 
-    public function getCriteria()
-    {
-        return $this->criteria;
-    }
+        $resolver->setRequired(array(
+            'criteria',
+            'total_count',
+            'route',
+            'target'
+        ));
 
-    public function setTarget($target)
-    {
-        $this->target = $target;
-        return $this;
-    }
+        $resolver->addAllowedTypes(array(
+            'criteria' => 'Operowo\Bundle\MainBundle\Entity\BaseCriteria',
+            'total_count' => 'int',
+            'route' => 'string',
+            'target' => 'array'
+        ));
 
-    public function getTarget()
-    {
-        return $this->target;
-    }
-
-    public function setTotalCount($totalCount)
-    {
-        $this->totalCount = $totalCount;
-        return $this;
-    }
-
-    public function getTotalCount()
-    {
-        return $this->totalCount;
-    }
-
-    public function setRoute($route)
-    {
-        $this->route = $route;
-        return $this;
-    }
-
-    public function getRoute()
-    {
-        return $this->route;
+        return $resolver;
     }
 }
