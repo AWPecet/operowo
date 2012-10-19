@@ -5,10 +5,10 @@ namespace Operowo\Bundle\MainBundle\View;
 use Assert\Assertion;
 use Operowo\Bundle\MainBundle\Entity\InstitutionsCriteria;
 use Symfony\Component\HttpFoundation\Response;
-use Operowo\Bundle\MainBundle\Entity\BaseCriteria;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Paginator;
 use JMS\DiExtraBundle\Annotation as DI;
+use Operowo\Bundle\MainBundle\Model\PaginatedResult;
 
 /**
  * @DI\Service(id="operowo.view.pagination")
@@ -16,11 +16,6 @@ use JMS\DiExtraBundle\Annotation as DI;
 class PaginationView extends BaseView
 {
     private $paginator;
-
-    /**
-     * @var BaseCriteria
-     */
-    private $criteria;
 
     /**
      * @DI\InjectParams({
@@ -38,10 +33,10 @@ class PaginationView extends BaseView
     {
         $this->assureIsBound(__METHOD__);
 
-        $criteria = $this->getOption('criteria');
+        $paginatedResults = $this->getOption('paginated_model');
         /** @var $pagination SlidingPagination */
-        $pagination = $this->paginator->paginate($this->getOption('target'), $criteria->getCurrentPage(), $criteria->getMaxPerPage());
-        $pagination->setTotalItemCount($this->getOption('total_count'));
+        $pagination = $this->paginator->paginate($paginatedResults->getItems(), $paginatedResults->getCurrentPage(), $paginatedResults->getMaxPerPage());
+        $pagination->setTotalItemCount($paginatedResults->getCountAll());
         $pagination->setUsedRoute($this->getOption('route'));
 
         return $pagination->render();
@@ -52,17 +47,13 @@ class PaginationView extends BaseView
         $resolver = parent::buildOptionsResolver();
 
         $resolver->setRequired(array(
-            'criteria',
-            'total_count',
+            'paginated_model',
             'route',
-            'target'
         ));
 
         $resolver->addAllowedTypes(array(
-            'criteria' => 'Operowo\Bundle\MainBundle\Entity\BaseCriteria',
-            'total_count' => 'int',
-            'route' => 'string',
-            'target' => 'array'
+            'paginated_model' => 'Operowo\Bundle\MainBundle\Model\PaginatedResult',
+            'route' => 'string'
         ));
 
         return $resolver;

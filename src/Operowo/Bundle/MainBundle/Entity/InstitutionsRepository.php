@@ -6,10 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\DiExtraBundle\Annotation\Service;
 use Doctrine\ORM\EntityRepository;
 use JMS\DiExtraBundle\Annotation as DI;
+use Operowo\Bundle\MainBundle\Model\PaginatedResult;
 
 class InstitutionsRepository extends EntityRepository
 {
-	public function findByCriteria(InstitutionsCriteria $criteria, &$count = null)
+	public function findByCriteria(InstitutionsCriteria $criteria)
 	{
 		$qb = $this->createQueryBuilder('i');
 
@@ -17,7 +18,7 @@ class InstitutionsRepository extends EntityRepository
         $paginator = $criteriaTransformer->transform($criteria, $qb);
         $count = $paginator->count();
 
-        return $paginator->getIterator();
+        return new PaginatedResult($paginator->getIterator()->getArrayCopy(), $count, $criteria);
 	}
 
     public function getDistributionInProvinces($withZero = false)

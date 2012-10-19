@@ -32,12 +32,11 @@ class ListInstitutionsController extends Controller
     public function getAction(InstitutionsCriteria $criteria)
     {
         $institutionsCount = 0;
-    	$institutions = $this->institutionsRepository->findByCriteria($criteria, $institutionsCount);
+    	$paginatedInstitutions = $this->institutionsRepository->findByCriteria($criteria, $institutionsCount);
         $distribution = $this->institutionsRepository->getDistributionInProvinces();
 
         $this->view
-            ->setInstitutions($institutions)
-            ->setInstitutionsCount($institutionsCount)
+            ->setInstitutions($paginatedInstitutions)
             ->setCriteria($criteria)
             ->setDistribution($distribution)
         ;

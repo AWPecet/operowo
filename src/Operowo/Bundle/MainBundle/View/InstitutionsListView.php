@@ -16,7 +16,6 @@ class InstitutionsListView extends BaseTemplateView
     private $institutions;
     private $criteria;
     private $distribution;
-    private $institutionsCount;
 
     /**
      * @var PaginationView
@@ -50,12 +49,11 @@ class InstitutionsListView extends BaseTemplateView
     {
         Assertion::notNull($this->getInstitutions(), 'Institutions are not set');
         Assertion::notNull($this->getCriteria(), 'Criteria is not set');
-        Assertion::notNull($this->getInstitutionsCount(), 'Institutions count is not set');
 
         $variables = array();
 
         $institutions = array();
-        foreach ($this->getInstitutions() as $institution) {
+        foreach ($this->getInstitutions()->getItems() as $institution) {
             $institutions[] = array(
                 'name' => $institution->getName(),
                 'province' => $institution->getProvince()->getName()
@@ -77,9 +75,7 @@ class InstitutionsListView extends BaseTemplateView
         ));
 
         $this->paginationView->bind(array(
-            'criteria' => $this->getCriteria()/*$this->getOption('criteria')*/,
-            'target' => $institutions,
-            'total_count' => $this->getInstitutionsCount(),
+            'paginated_model' => $this->getInstitutions(),
             'route' => 'operowo_institutions_list'
         ));
 
@@ -121,16 +117,5 @@ class InstitutionsListView extends BaseTemplateView
     public function getInstitutions()
     {
         return $this->institutions;
-    }
-
-    public function setInstitutionsCount($institutionsCount)
-    {
-        $this->institutionsCount = $institutionsCount;
-        return $this;
-    }
-
-    public function getInstitutionsCount()
-    {
-        return $this->institutionsCount;
     }
 }
