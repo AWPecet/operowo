@@ -69,7 +69,8 @@ jms_di_extra:
         directories: [ "%kernel.root_dir%/../src" ]
 
 mopa_bootstrap:
-    navbar: ~
+    navbar:
+      template: OperowoMainBundle:Navbar:navbar.html.twig
 
 knp_paginator:
     template:
