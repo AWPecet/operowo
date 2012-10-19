@@ -7,7 +7,7 @@ operowo_main:
     resource: "@OperowoMainBundle/Controller/"
     type:     annotation
     prefix:   /
-    
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
