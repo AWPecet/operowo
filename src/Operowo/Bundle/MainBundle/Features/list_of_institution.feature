@@ -53,21 +53,21 @@ Feature: List of institutions
       | Opera Katowicka  | śląskie       |
       | Opera Wrosławska | dolnośląskie  |
       And I follow "Instytucje"
-     Then I should see "Województwa" in the ".sidebar .provinces_filter .nav-header" element
-  #And I should see "śląskie (2)" in the ".sidebar .provinces_filter" element
-      And I should see "śląskie" in the ".sidebar .provinces_filter" element
-      And I should see "opolskie" in the ".sidebar .provinces_filter" element
-      And I should not see "małopolskie" in the ".sidebar .provinces_filter" element
-     When I follow "filter_3"
+     Then I should see "Województwa" in the ".sidebar .filter_provinces .nav-header" element
+  #And I should see "śląskie (2)" in the ".sidebar .filter_provinces" element
+      And I should see "śląskie" in the ".sidebar .filter_provinces" element
+      And I should see "opolskie" in the ".sidebar .filter_provinces" element
+      And I should not see "małopolskie" in the ".sidebar .filter_provinces" element
+     When I follow "filter_provinces_1"
      Then I should see "Lista instytucji" in the "h1" element
-      And I should see "śląskie" in the ".sidebar .provinces_filter .active" element
-      And I should see 1 ".sidebar .provinces_filter .active" element
+      And I should see "śląskie" in the ".sidebar .filter_provinces .active" element
+      And I should see 1 ".sidebar .filter_provinces .active" element
       And I should see 2 "div .institution" element
-     When I follow "filter_2"
-     Then I should see "śląskie" in the ".sidebar .provinces_filter .active #filter_3" element
-      And I should see "opolskie" in the ".sidebar .provinces_filter .active #filter_2" element
-      And I should see 2 ".sidebar .provinces_filter .active" element
+     When I follow "filter_provinces_2"
+     Then I should see "śląskie" in the ".sidebar .filter_provinces .active #filter_provinces_1" element
+      And I should see "opolskie" in the ".sidebar .filter_provinces .active #filter_provinces_2" element
+      And I should see 2 ".sidebar .filter_provinces .active" element
       And I should see 3 "div .institution" element
-     When I follow "filter_3"
-     Then I should not see "śląskie" in the ".sidebar .provinces_filter .active #filter_2" element
+     When I follow "filter_provinces_1"
+     Then I should not see "śląskie" in the ".sidebar .filter_provinces .active #filter_provinces_2" element
       And I should see 1 "div .institution" element

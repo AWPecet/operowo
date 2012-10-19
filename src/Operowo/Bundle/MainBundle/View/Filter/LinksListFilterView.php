@@ -51,7 +51,7 @@ class LinksListFilterView extends BaseTemplateView
                 }
             }
 
-            $choices[] = array(
+            $choices[$choiceId] = array(
                 'subject' => $choice,
                 'choice_route_name' => $this->getOption('choice_route_name'),
                 'selected' => $isSelected,

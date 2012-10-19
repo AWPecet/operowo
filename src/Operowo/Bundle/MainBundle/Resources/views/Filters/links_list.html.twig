@@ -1,14 +1,14 @@
 <div class="well">
-    <ul class="nav nav-list provinces_filter">
+    <ul class="nav nav-list filter_{{ name }}">
         <li class="nav-header">{{ label | trans }}</li>
-            {% for choice in choices %}
+            {% for choiceId, choice in choices %}
             {% set class = "" %}
             {% if choice['selected'] %}
                 {% set class="active" %}
             {% endif %}
 
             <li class="{{ class }}">
-                <a id="filter_{{ loop.index }}" href="{{ path(choice['choice_route_name'], choice['query_parameters']) }}">
+                <a id="filter_{{ name }}_{{ choiceId }}" href="{{ path(choice['choice_route_name'], choice['query_parameters']) }}">
                     {{ choice['subject'] }}
                 </a>
             </li>
