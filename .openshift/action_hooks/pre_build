@@ -4,6 +4,9 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
+echo "Load environment variables"
+sh $OPENSHIFT_DATA_DIR/env_vars.sh
+
 echo "Move config templates"
 cp $OPENSHIFT_REPO_DIR/app/config/parameters.yml.env_template $OPENSHIFT_REPO_DIR/app/config/parameters.yml
 

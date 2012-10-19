@@ -1,0 +1,35 @@
+{% extends 'OperowoMainBundle::layout.html.twig' %}
+
+
+{% block headline %}
+	{% trans %}institutions_list{% endtrans %}
+{% endblock %}
+
+{% block content %}
+	<div class="span8">
+
+		{% for institution in institutions %}
+			<div class="institution row-fluid">
+				<h2>{{ institution.name }}</h2>
+
+                <div class="span4">
+                    <img src="http://placehold.it/150x150" class="img-polaroid" />
+                </div>
+
+                <div class="span7">
+                    <dl class="dl-horizontal">
+                        <dt>{% trans %}province{% endtrans %}:</dt>
+                        <dd>{{ institution.province }}</dd>
+                    </dl>
+                </div>
+
+			</div>
+            <hr/>
+		{% endfor %}
+
+		{{ pagination_view.toString() | raw }}
+    </div>
+    <div class="span4 sidebar">
+        {{ filters_view.toString() | raw }}
+    </div>
+{% endblock %}

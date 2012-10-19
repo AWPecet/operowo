@@ -27,3 +27,6 @@ doctrine:
                 user:     %database_test_user%
                 password: %database_test_password%
                 charset:  UTF8
+
+bazinga_faker:
+    orm: doctrine

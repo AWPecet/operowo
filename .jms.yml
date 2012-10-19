@@ -1,0 +1,14 @@
+path_configs:
+    name:
+        paths:                [ src/* ]
+        fabpot_cs_fixer:
+            enabled:              true
+            level:                all
+        psr0_compliance:
+            enabled:              true
+        phpunit_checks:
+            enabled:              true
+        loops_must_use_braces:
+            enabled:              true
+        checkstyle:
+            enabled:              true
