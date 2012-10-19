@@ -13,10 +13,6 @@ use Operowo\Bundle\MainBundle\View\Filter\LinksListFilterView;
  */
 class InstitutionsListView extends BaseTemplateView
 {
-    private $institutions;
-    private $criteria;
-    private $distribution;
-
     /**
      * @var PaginationView
      */
@@ -47,13 +43,8 @@ class InstitutionsListView extends BaseTemplateView
 
     public function buildTemplateVariables()
     {
-        Assertion::notNull($this->getInstitutions(), 'Institutions are not set');
-        Assertion::notNull($this->getCriteria(), 'Criteria is not set');
-
-        $variables = array();
-
         $institutions = array();
-        foreach ($this->getInstitutions()->getItems() as $institution) {
+        foreach ($this->getOption('institutions')->getItems() as $institution) {
             $institutions[] = array(
                 'name' => $institution->getName(),
                 'province' => $institution->getProvince()->getName()
@@ -61,24 +52,26 @@ class InstitutionsListView extends BaseTemplateView
         }
 
         $choices = array();
-        foreach ($this->getDistribution() as $provinceWithCount) {
+        foreach ($this->getOption('distribution_in_provinces') as $provinceWithCount) {
             $choices[$provinceWithCount['province']->getId()] = $provinceWithCount['province'];
         }
 
         $this->provinceFilterView->bind(array(
             'name' => 'provinces',
             'choices' => $choices,
-            'chosen' => $this->getCriteria()->getFilterOnProvinceId(),
+            'chosen' => $this->getOption('criteria')->getFilterOnProvinceId(),
             'label' => 'provinces',
             'choice_route_name' => 'operowo_institutions_list',
-            'query_parameters' => $this->getCriteria()->toArray()
+            'query_parameters' => $this->getOption('criteria')->toArray()
         ));
 
         $this->paginationView->bind(array(
-            'paginated_model' => $this->getInstitutions(),
+            'paginated_model' => $this->getOption('institutions'),
             'route' => 'operowo_institutions_list'
         ));
 
+
+        $variables = array();
         $variables['institutions'] = $institutions;
         $variables['pagination_view'] = $this->paginationView;
         $variables['filters_view'] = $this->provinceFilterView;
@@ -86,36 +79,20 @@ class InstitutionsListView extends BaseTemplateView
         return $variables;
     }
 
-    public function setCriteria($criteria)
+    protected function buildOptionsResolver()
     {
-        $this->criteria = $criteria;
-        return $this;
-    }
+        $resolver = parent::buildOptionsResolver();
 
-    public function getCriteria()
-    {
-        return $this->criteria;
-    }
+        $resolver->setRequired(array(
+            'criteria',
+            'institutions',
+            'distribution_in_provinces'
+        ));
+        $resolver->setAllowedTypes(array(
+            'criteria' => 'Operowo\Bundle\MainBundle\Entity\InstitutionsCriteria',
+            'institutions' => 'Operowo\Bundle\MainBundle\Model\PaginatedResult'
+        ));
 
-    public function setDistribution($distribution)
-    {
-        $this->distribution = $distribution;
-        return $this;
-    }
-
-    public function getDistribution()
-    {
-        return $this->distribution;
-    }
-
-    public function setInstitutions($institutions)
-    {
-        $this->institutions = $institutions;
-        return $this;
-    }
-
-    public function getInstitutions()
-    {
-        return $this->institutions;
+        return $resolver;
     }
 }

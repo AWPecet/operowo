@@ -35,11 +35,11 @@ class ListInstitutionsController extends Controller
     	$paginatedInstitutions = $this->institutionsRepository->findByCriteria($criteria, $institutionsCount);
         $distribution = $this->institutionsRepository->getDistributionInProvinces();
 
-        $this->view
-            ->setInstitutions($paginatedInstitutions)
-            ->setCriteria($criteria)
-            ->setDistribution($distribution)
-        ;
+        $this->view->bind(array(
+            'institutions' => $paginatedInstitutions,
+            'criteria' => $criteria,
+            'distribution_in_provinces' => $distribution
+        ));
 
         return $this->view->toResponse();
     }
