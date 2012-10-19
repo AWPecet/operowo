@@ -16,8 +16,6 @@ class PhabricContext extends BehatContext
 
     public function __construct(array $parameters)
     {
-        $config = new Configuration();
-
         $externalParameters = Yaml::parse(file_get_contents($parameters['db_parameters_file']));
 
         $db = DriverManager::getConnection(array(
@@ -65,7 +63,7 @@ class PhabricContext extends BehatContext
             return $id;
         });
 
-        $province = $this->phabric->createEntity('province', $phabricConfig['entities']['Province']);
+        $this->phabric->createEntity('province', $phabricConfig['entities']['Province']);
     }
 
     /**

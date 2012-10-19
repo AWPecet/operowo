@@ -61,7 +61,7 @@ class Doctrine implements IDatasource
      *
      * @return void
      */
-    public function __construct(Conn $connection, $config = null)
+    public function __construct(Conn $connection, array $config = null)
     {
         $this->connection = $connection;
 
@@ -189,7 +189,7 @@ class Doctrine implements IDatasource
             throw new \RuntimeException("Table data does not have required name column [$phName]");
         }
 
-        $result = $this->connection->insert($tableName, $data);
+        $this->connection->insert($tableName, $data);
 
         $sequenceName = null;
         if(isset($this->tableMappings[$name]['sequenceName']))
@@ -275,7 +275,7 @@ class Doctrine implements IDatasource
         $builder->select('*')
             ->from($tableName, 'a')
             ->where("a.$phName = $nValue");
-        $sql = $builder->getSQL();
+        $builder->getSQL();
         $result = $builder->execute();
 
         $initalData = $result->fetchAll(\PDO::FETCH_ASSOC);
