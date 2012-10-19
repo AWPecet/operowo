@@ -75,3 +75,8 @@ mopa_bootstrap:
 knp_paginator:
     template:
         pagination: MopaBootstrapBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Operowo\Bundle\UserBundle\Entity\User
