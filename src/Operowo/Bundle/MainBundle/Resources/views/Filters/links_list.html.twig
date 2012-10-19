@@ -8,7 +8,7 @@
             {% endif %}
 
             <li class="{{ class }}">
-                <a id="filter_{{ loop.index }}" href="{{ path(choice['route'], choice['query_parameters']) }}">
+                <a id="filter_{{ loop.index }}" href="{{ path(choice['choice_route_name'], choice['query_parameters']) }}">
                     {{ choice['subject'] }}
                 </a>
             </li>

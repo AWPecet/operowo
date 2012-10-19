@@ -32,87 +32,55 @@ class LinksListFilterView extends BaseTemplateView
     {
         $variables = parent::buildTemplateVariables();
 
+        $filterName = $this->getOption('name');
         $choices = array();
-        foreach ($this->getChoices() as $key => $choice) {
-            $choiceId = $choice->getId();
-            $isSelected = in_array($choiceId, $this->getSelectedChoicesId());
+        foreach ($this->getOption('choices') as $key => $choice) {
+            $choiceId = $choice;
+            if (!is_scalar($choice)) {
+                $choiceId = $key;
+            }
+            $isSelected = in_array($choiceId, $this->getOption('chosen'));
 
-            $queryParameters = $this->getGenericQueryParameters();
+            $queryParameters = $this->getOption('query_parameters');
             if (!$isSelected) {
-                $queryParameters = array_merge_recursive($queryParameters, array('provinces' => array($choiceId)));
-            } else if(isset($queryParameters['provinces'])) {
-                $foundKey = array_search($choiceId, $queryParameters['provinces']);
+                $queryParameters = array_merge_recursive($queryParameters, array($filterName => array($choiceId)));
+            } else if(isset($queryParameters[$filterName])) {
+                $foundKey = array_search($choiceId, $queryParameters[$filterName]);
                 if($foundKey !== false) {
-                    unset($queryParameters['provinces'][$foundKey]);
+                    unset($queryParameters[$filterName][$foundKey]);
                 }
             }
 
-            $choices[$key] = array(
+            $choices[] = array(
                 'subject' => $choice,
-                'route' => $this->getRoute(),
+                'choice_route_name' => $this->getOption('choice_route_name'),
                 'selected' => $isSelected,
                 'query_parameters' => $queryParameters
             );
         }
 
         $variables['choices'] = $choices;
-        $variables['label'] = $this->getFilterLabel();
+        $variables['name'] = $this->getOption('name');
+        $variables['label'] = $this->getOption('label') ? $this->getOption('label') : ucfirst($this->getOption('name'));
 
         return $variables;
     }
 
-    public function setChoices($choices)
+    protected function buildOptionsResolver()
     {
-        $this->choices = $choices;
-        return $this;
-    }
+        $resolver = parent::buildOptionsResolver();
 
-    public function getChoices()
-    {
-        return $this->choices;
-    }
+        $resolver->setRequired(array(
+            'name',
+            'choices',
+            'chosen',
+            'query_parameters',
+            'choice_route_name'
+        ));
+        $resolver->setOptional(array(
+            'label'
+        ));
 
-    public function setFilterLabel($filterLabel)
-    {
-        $this->filterLabel = $filterLabel;
-        return $this;
-    }
-
-    public function getFilterLabel()
-    {
-        return $this->filterLabel;
-    }
-
-    public function setGenericQueryParameters($genericQueryParameters)
-    {
-        $this->genericQueryParameters = $genericQueryParameters;
-        return $this;
-    }
-
-    public function getGenericQueryParameters()
-    {
-        return $this->genericQueryParameters;
-    }
-
-    public function setRoute($route)
-    {
-        $this->route = $route;
-        return $this;
-    }
-
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    public function setSelectedChoicesId($selectedChoicesId)
-    {
-        $this->selectedChoicesId = $selectedChoicesId;
-        return $this;
-    }
-
-    public function getSelectedChoicesId()
-    {
-        return $this->selectedChoicesId;
+        return $resolver;
     }
 }

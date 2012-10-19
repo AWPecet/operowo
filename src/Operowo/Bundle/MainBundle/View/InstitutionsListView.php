@@ -64,16 +64,17 @@ class InstitutionsListView extends BaseTemplateView
 
         $choices = array();
         foreach ($this->getDistribution() as $provinceWithCount) {
-            $choices[] = $provinceWithCount['province'];
+            $choices[$provinceWithCount['province']->getId()] = $provinceWithCount['province'];
         }
 
-        $this->provinceFilterView
-            ->setChoices($choices)
-            ->setFilterLabel('provinces')
-            ->setRoute('operowo_institutions_list')
-            ->setGenericQueryParameters($this->getCriteria()->toArray())
-            ->setSelectedChoicesId($this->getCriteria()->getFilterOnProvinceId())
-        ;
+        $this->provinceFilterView->bind(array(
+            'name' => 'provinces',
+            'choices' => $choices,
+            'chosen' => $this->getCriteria()->getFilterOnProvinceId(),
+            'label' => 'provinces',
+            'choice_route_name' => 'operowo_institutions_list',
+            'query_parameters' => $this->getCriteria()->toArray()
+        ));
 
         $this->paginationView->bind(array(
             'criteria' => $this->getCriteria()/*$this->getOption('criteria')*/,
