@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
             new Operowo\Bundle\UserBundle\OperowoUserBundle(),
         );
 
