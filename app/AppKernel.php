@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Operowo\Bundle\UserBundle\OperowoUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

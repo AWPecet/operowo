@@ -1,3 +1,8 @@
+operowo_user:
+    resource: "@OperowoUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 operowo_main:
     resource: "@OperowoMainBundle/Controller/"
     type:     annotation
