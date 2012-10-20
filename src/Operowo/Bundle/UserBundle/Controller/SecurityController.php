@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use FOS\UserBundle\Controller\SecurityController as BaseSecurityController;
 
-class SecurityController extends Controller
+class SecurityController extends BaseSecurityController
 {
     /**
      * @Template()
