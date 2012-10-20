@@ -1,0 +1,33 @@
+{% extends 'OperowoMainBundle::layout.html.twig' %}
+
+
+{% block headline %}
+{% trans from "OperowoUserBundle" %}signin_title{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="span8 content">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="username">{% trans %}username{% endtrans %}:</label>
+                <div class="controls">
+                    <input type="text" name="_username" id="username" placeholder="{% trans %}username{% endtrans %}" value="{{ last_username }}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="username">{% trans %}password{% endtrans %}:</label>
+                <div class="controls">
+                    <input type="password" name="_password" id="password" placeholder="{% trans %}password{% endtrans %}">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" name="_remember_me" id="remember_me" value="on"> {% trans %}remember_me{% endtrans %}
+                    </label>
+                    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{% trans %}signin{% endtrans %}">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
