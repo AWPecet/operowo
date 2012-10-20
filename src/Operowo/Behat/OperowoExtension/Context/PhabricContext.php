@@ -37,6 +37,7 @@ class PhabricContext extends BehatContext
     {
         $this->setUpInstitutionEntity($phabricConfig);
         $this->setUpProvinceEntity($phabricConfig);
+        $this->setUpUserEntity($phabricConfig);
     }
 
     protected function setUpInstitutionEntity($phabricConfig)
@@ -66,6 +67,22 @@ class PhabricContext extends BehatContext
         $this->phabric->createEntity('province', $phabricConfig['entities']['Province']);
     }
 
+    protected function setUpUserEntity($phabricConfig)
+    {
+        $user = $this->phabric->createEntity('user', $phabricConfig['entities']['User']);
+        $user->setNameTransformations(array(
+            'Username canonical' => 'username_canonical',
+            'Email canonical' => 'email_canonical'
+        ));
+        $user->setDefaults(array(
+            'enabled' => 1,
+            'locked' => 0,
+            'expired' => 0,
+            'roles' => serialize(array()),
+            'credentials_expired' => 0
+        ));
+    }
+
     /**
      * @Given /^The following institutions exists$/
      */
@@ -80,5 +97,57 @@ class PhabricContext extends BehatContext
     public function theFollowingProvincesExist(TableNode $provinces)
     {
         $this->phabric->updateFromTable('province', $provinces);
+    }
+
+    /**
+     * @Given /^The following users exists$/
+     */
+    public function theFollowingUsersExist(TableNode $users)
+    {
+        $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder();
+        $headersRow = $users->getRow(0);
+        $newData = array();
+
+        foreach ($users->getHash() as $key => $row) {
+            if (isset($row['Username']) && !isset($row['Email'])) {
+                $headersRow[] = 'Email';
+                $row['Email'] = $row['Username'].'@operowo.sf2';
+            }
+            if (isset($row['Username']) && !isset($row['Salt'])) {
+                $headersRow[] = 'Salt';
+                $row['Salt'] = $row['Username'];
+            }
+            if (isset($row['Plain password']) && !isset($row['Password'])) {
+                $headersRow[] = 'Password';
+                $row['Password'] = $encoder->encodePassword($row['Plain password'], $row['Salt']);
+            }
+            if (!isset($row['Plain password']) && !isset($row['Password'])) {
+                $headersRow[] = 'Password';
+                $row['Password'] = $encoder->encodePassword($row['Username'], $row['Salt']);
+            }
+            if (isset($row['Username']) && !isset($headersRow['Username canonical'])) {
+                $headersRow[] = 'Username canonical';
+                $row['Username canonical'] = $row['Username'];
+            }
+            if (isset($row['Email']) && !isset($headersRow['Email canonical'])) {
+                $headersRow[] = 'Email canonical';
+                $row['Email canonical'] = $row['Email'];
+            }
+
+            $headersRow = array_unique($headersRow);
+
+            $transformedRow = array();
+            foreach ($row as $name => $value) {
+                if ($name == 'Plain password') {
+                    continue;
+                }
+                $transformedRow[array_search($name, $headersRow)] = $value;
+            }
+
+            $newData[$key+1] = $transformedRow;
+        }
+
+        $users->setRows(array($headersRow) + $newData);
+        $this->phabric->updateFromTable('user', $users);
     }
 }
