@@ -13,3 +13,4 @@ before_script:
 script:
     - phpunit -c app
     - php bin/behat @OperowoMainBundle
+    - php bin/behat @OperowoUserBundle
