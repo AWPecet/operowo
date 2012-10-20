@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use FOS\UserBundle\Controller\SecurityController as BaseSecurityController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends BaseSecurityController
 {
@@ -25,5 +26,14 @@ class SecurityController extends BaseSecurityController
             'last_username' => $lastUsername,
             'csrf_token' => $csrfToken
         );
+    }
+
+    public function loginAction()
+    {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return new RedirectResponse($this->container->get('router')->generate('homepage'), 302);
+        }
+
+        return parent::loginAction();
     }
 }
