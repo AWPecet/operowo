@@ -11,5 +11,6 @@ class FeatureContext extends MinkContext
 		$this->useContext('database_context', new DatabaseContext());
         $this->useContext('faker_context', new FakerContext());
         $this->useContext('phabric_context', new PhabricContext($parameters['Phabric']));
+        $this->useContext('user_context', new UserContext());
 	}
 }
