@@ -22,3 +22,8 @@ default:
                 primaryKey: 'id'
                 nameCol: 'name'
                 sequenceName: 'provinces_id_seq'
+              User:
+                tableName: 'users'
+                entityName: 'User'
+                primaryKey: 'id'
+                nameCol: 'username'
