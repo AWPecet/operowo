@@ -1,0 +1,12 @@
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <input style="margin-bottom: 15px;" type="text" placeholder="{% trans %}username{% endtrans %}" id="username" name="_username" value="{{ last_username }}">
+
+    <input style="margin-bottom: 15px;" type="password" placeholder="{% trans %}password{% endtrans %}" id="password" name="_password">
+
+    <input style="float: left; margin-right: 10px;" type="checkbox" name="_remember_me" id="remember_me" value="on">
+    <label class="string optional" for="remember_me">{% trans %}remember_me{% endtrans %}</label>
+
+    <input class="btn btn-primary btn-block" type="submit" id="_submit" name="_submit" value="{% trans %}signin{% endtrans %}">
+</form>

@@ -23,20 +23,27 @@
             </div>
 
             <ul class="nav pull-right">
-                <li><a href="#">{% trans %}signup{% endtrans %}</a></li>
-                <li class="divider-vertical"></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">{% trans %}signin{% endtrans %} <strong class="caret"></strong></a>
-                    <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                        <form method="post" action="" accept-charset="UTF-8">
-                            <input style="margin-bottom: 15px;" type="text" placeholder="{% trans %}username{% endtrans %}" id="username" name="username">
-                            <input style="margin-bottom: 15px;" type="password" placeholder="{% trans %}password{% endtrans %}" id="password" name="password">
-                            <input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
-                            <label class="string optional" for="user_remember_me">{% trans %}remember_me{% endtrans %}</label>
-                            <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="{% trans %}signin{% endtrans %}">
-                        </form>
-                    </div>
-                </li>
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="#">{% trans %}signup{% endtrans %}</a></li>
+                    <li class="divider-vertical"></li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">{% trans %}signin{% endtrans %} <strong class="caret"></strong></a>
+                        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                            {% render "OperowoUserBundle:Security:navbarForm" with{}, {'standalone': true} %}
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{ options.app.user.username }} <strong class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li><a>test1</a></li>
+                            <li><a>test2</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Wyloguj</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
