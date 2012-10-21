@@ -35,6 +35,13 @@
             </div>
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{% trans %}signin{% endtrans %}">
+
+                <a href="{{ path('fos_user_resetting_request') }}">
+                    {% trans from "OperowoUserBundle" %}reset_password_link{% endtrans %}
+                </a>
+                <a href="{{ path('fos_user_registration_register') }}">
+                    {% trans from "OperowoUserBundle" %}register_link{% endtrans %}
+                </a>
             </div>
         </form>
     </div>

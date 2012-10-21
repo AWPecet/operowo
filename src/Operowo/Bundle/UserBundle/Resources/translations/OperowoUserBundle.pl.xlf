@@ -6,6 +6,14 @@
                 <source>signin_title</source>
                 <target>Logowanie</target>
             </trans-unit>
+            <trans-unit id="2">
+                <source>reset_password_link</source>
+                <target>Zapomniałes hasła?</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>register_link</source>
+                <target>Załóż konto</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -39,7 +39,7 @@ Feature: User can login
     Then I should be on "/login"
      And I should see "Nieprawidłowa nazwa użytkownika lub hasło"
 
-  @database @current
+  @database
   Scenario: Logged user can not open login page
     Given The following users exists
       | Username |
@@ -47,3 +47,13 @@ Feature: User can login
       And I am logged as "user_1"
      When I am on "/login"
      Then I should be on "/"
+
+  Scenario: Anonymous user can click link to register
+    Given I am on "/"
+      And I follow "Zaloguj"
+     Then I should see "Załóż konto" in the ".content form .form-actions" element
+
+  Scenario: Anonymous user can click link to reset password
+    Given I am on "/"
+      And I follow "Zaloguj"
+     Then I should see "Zapomniałes hasła?" in the ".content form .form-actions" element
