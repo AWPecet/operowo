@@ -72,7 +72,8 @@ class PhabricContext extends BehatContext
         $user = $this->phabric->createEntity('user', $phabricConfig['entities']['User']);
         $user->setNameTransformations(array(
             'Username canonical' => 'username_canonical',
-            'Email canonical' => 'email_canonical'
+            'Email canonical' => 'email_canonical',
+            'Confirmation token' => 'confirmation_token'
         ));
         $user->setDefaults(array(
             'enabled' => 1,

@@ -24,7 +24,7 @@
 
             <ul class="nav pull-right user">
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a href="#">{% trans %}signup{% endtrans %}</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}">{% trans %}signup{% endtrans %}</a></li>
                     <li class="divider-vertical"></li>
 
                     <li class="dropdown">

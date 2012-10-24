@@ -1,0 +1,18 @@
+{% extends 'OperowoMainBundle::layout.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import flash %}
+{% form_theme form 'MopaBootstrapBundle:Form:fields.html.twig' %}
+
+{% block headline %}
+    {% trans from "OperowoUserBundle" %}register_title{% endtrans %}
+{% endblock %}
+
+{% block content %}
+<div class="span8 content">
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal"  novalidate="novalidate">
+        {{ form_widget(form, {'show_legend': false}) }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+    </form>
+</div>
+{% endblock %}

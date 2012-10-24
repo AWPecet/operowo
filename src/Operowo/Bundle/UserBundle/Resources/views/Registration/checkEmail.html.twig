@@ -1,0 +1,11 @@
+{% extends 'OperowoMainBundle::layout.html.twig' %}
+
+{% block headline %}
+{% trans from "OperowoUserBundle" %}check_email{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div class="span8">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    </div>
+{% endblock %}

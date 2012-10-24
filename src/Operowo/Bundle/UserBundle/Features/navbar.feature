@@ -6,10 +6,14 @@ Feature: User functions in navbar
   Scenario: Anonymus user see registration link
     Given I am on "/"
      Then I should see "Zarejestruj" in the ".navbar .user" element
+     When I follow "Zarejestruj"
+     Then the response status code should be 200
 
   Scenario: Anonymus user see login link
     Given I am on "/"
      Then I should see "Zaloguj" in the ".navbar .user" element
+     When I follow "Zaloguj"
+     Then the response status code should be 200
 
   Scenario: Anonymus user see login form
     Given I am on "/"
